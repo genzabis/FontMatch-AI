@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FontMatch AI - Saran Font Pairing untuk Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts untuk preview -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&family=Nunito:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Lato:wght@300;400;700&family=Open+Sans:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-font"></i>
+                <h1>FontMatch<span class="ai-text">AI</span></h1>
+            </div>
+            <p class="tagline">AI yang bantu kamu pilih font yang cocok untuk website</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <h2><i class="fas fa-sliders-h"></i> Pilih Preferensi Font-mu</h2>
+                
+                <div class="form-container">
+                    <!-- Font Pilihan Utama -->
+                    <div class="form-group">
+                        <label for="primaryFont">
+                            <i class="fas fa-font"></i> Font Favorit Kamu
+                        </label>
+                        <select id="primaryFont" class="form-select">
+                            <option value="">Pilih font utama...</option>
+                            <option value="Poppins">Poppins</option>
+                            <option value="Inter">Inter</option>
+                            <option value="Montserrat">Montserrat</option>
+                            <option value="Roboto">Roboto</option>
+                            <option value="Nunito">Nunito</option>
+                            <option value="Open Sans">Open Sans</option>
+                            <option value="Lato">Lato</option>
+                            <option value="Playfair Display">Playfair Display</option>
+                            <option value="Merriweather">Merriweather</option>
+                            <option value="Space Grotesk">Space Grotesk</option>
+                        </select>
+                        <p class="form-help">Atau ketik nama font lain</p>
+                        <input type="text" id="customFont" class="form-input" placeholder="Contoh: Raleway, Source Sans Pro...">
+                    </div>
+
+                    <!-- Tipe Website -->
+                    <div class="form-group">
+                        <label for="websiteType">
+                            <i class="fas fa-globe"></i> Tipe Website
+                        </label>
+                        <div class="button-group">
+                            <button type="button" class="type-btn active" data-value="portfolio">Portfolio</button>
+                            <button type="button" class="type-btn" data-value="ecommerce">Toko Online</button>
+                            <button type="button" class="type-btn" data-value="blog">Blog</button>
+                            <button type="button" class="type-btn" data-value="company">Website Perusahaan</button>
+                            <button type="button" class="type-btn" data-value="landing">Landing Page</button>
+                        </div>
+                    </div>
+
+                    <!-- Mood / Suasana -->
+                    <div class="form-group">
+                        <label for="mood">
+                            <i class="fas fa-palette"></i> Suasana yang Diinginkan
+                        </label>
+                        <div class="mood-grid">
+                            <div class="mood-item" data-mood="professional">
+                                <i class="fas fa-suitcase"></i>
+                                <span>Professional</span>
+                            </div>
+                            <div class="mood-item" data-mood="modern">
+                                <i class="fas fa-rocket"></i>
+                                <span>Modern</span>
+                            </div>
+                            <div class="mood-item" data-mood="playful">
+                                <i class="fas fa-smile"></i>
+                                <span>Playful</span>
+                            </div>
+                            <div class="mood-item" data-mood="elegant">
+                                <i class="fas fa-gem"></i>
+                                <span>Elegant</span>
+                            </div>
+                            <div class="mood-item" data-mood="friendly">
+                                <i class="fas fa-handshake"></i>
+                                <span>Friendly</span>
+                            </div>
+                            <div class="mood-item" data-mood="tech">
+                                <i class="fas fa-code"></i>
+                                <span>Tech</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Warna (Optional) -->
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-fill-drip"></i> Warna Utama (Opsional)
+                        </label>
+                        <div class="color-picker">
+                            <input type="color" id="primaryColor" value="#2563eb">
+                            <span id="colorValue">#2563eb</span>
+                            <button type="button" id="addColorBtn" class="icon-btn">
+                                <i class="fas fa-plus"></i> Tambah Warna
+                            </button>
+                        </div>
+                        <div id="colorPalette" class="color-palette">
+                            <!-- Warna akan ditambahkan di sini -->
+                        </div>
+                    </div>
+
+                    <!-- Tombol Generate -->
+                    <div class="form-group">
+                        <button id="generateBtn" class="generate-btn">
+                            <i class="fas fa-magic"></i> Generate Font Pairing
+                        </button>
+                        <button id="randomBtn" class="secondary-btn">
+                            <i class="fas fa-random"></i> Coba Random
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preview Section -->
+            <section class="preview-section">
+                <h2><i class="fas fa-eye"></i> Live Preview</h2>
+                
+                <div class="preview-container">
+                    <!-- Text Input untuk Preview -->
+                    <div class="preview-controls">
+                        <textarea id="previewText" class="preview-textarea" placeholder="Ketik teks di sini untuk preview...">Contoh teks untuk melihat bagaimana font terlihat. Heading besar, paragraph biasa, dan button.</textarea>
+                        <div class="preview-options">
+                            <div class="size-control">
+                                <label>Ukuran Font:</label>
+                                <input type="range" id="fontSize" min="12" max="36" value="16">
+                                <span id="sizeValue">16px</span>
+                            </div>
+                            <div class="theme-toggle">
+                                <button id="themeBtn" class="theme-btn">
+                                    <i class="fas fa-moon"></i> Mode Gelap
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hasil Preview -->
+                    <div id="previewResult" class="preview-result">
+                        <div class="preview-card">
+                            <h3 class="preview-heading" style="font-family: 'Poppins', sans-serif; font-size: 32px;">
+                                Heading Utama Website
+                            </h3>
+                            <p class="preview-body" style="font-family: 'Inter', sans-serif; font-size: 16px;">
+                                Ini adalah contoh teks paragraf. Perhatikan bagaimana font ini terlihat untuk body text yang panjang. Readability sangat penting untuk pengalaman pengguna.
+                            </p>
+                            <button class="preview-button" style="font-family: 'Poppins', sans-serif; font-size: 14px;">
+                                Tombol CTA
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section">
+                <h2><i class="fas fa-star"></i> Hasil Rekomendasi Font</h2>
+                
+                <div id="loading" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>AI sedang mencari font terbaik untuk kamu...</p>
+                </div>
+
+                <div id="resultsContainer" class="results-container">
+                    <!-- Hasil dari AI akan muncul di sini -->
+                    <div class="placeholder-message">
+                        <i class="fas fa-search"></i>
+                        <h3>Belum ada hasil</h3>
+                        <p>Isi form di atas dan klik "Generate Font Pairing" untuk mendapatkan saran font yang cocok!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CSS Code Section -->
+            <section class="code-section">
+                <h2><i class="fas fa-code"></i> CSS Code Generator</h2>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <h3>Kode CSS Siap Pakai</h3>
+                        <button id="copyBtn" class="copy-btn">
+                            <i class="far fa-copy"></i> Salin Kode
+                        </button>
+                    </div>
+                    <pre id="cssCode" class="css-code">
+/* Font Variables */
+:root {
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-accent: 'Montserrat', sans-serif;
+}
+
+/* Heading Styles */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* Body Text */
+body, p, li, span {
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* Buttons */
+button, .btn {
+    font-family: var(--font-accent);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}</pre>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>FontMatch AI</h3>
+                    <p>Tools AI untuk membantu designer dan developer memilih font pairing yang cocok.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">DeepSeek AI</span>
+                        <span class="tech-tag">Google Fonts</span>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/username/fontmatch-ai" target="_blank">
+                        <i class="fab fa-github"></i> GitHub Repository
+                    </a>
+                    <button id="clearBtn" class="footer-btn">
+                        <i class="fas fa-trash"></i> Reset Form
+                    </button>
+                    <button id="saveBtn" class="footer-btn">
+                        <i class="fas fa-heart"></i> Simpan Favorit
+                    </button>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Dibuat dengan <i class="fas fa-heart"></i> untuk komunitas developer Indonesia</p>
+                <p class="copyright">© 2026 FontMatch AI • Titik hijau di GitHub adalah hidup!</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
